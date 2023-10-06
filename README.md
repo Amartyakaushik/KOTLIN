@@ -1,2 +1,2 @@
 # KOTLIN
-Kotlin full course 
+Exploring kotlin from the basics...
