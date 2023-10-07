@@ -1,4 +1,4 @@
-    //OOPS
+    //OOP
 //Class definition
 class car(val name:String,val type:String,var kmran:Int){            //Properties
     fun drive(){
