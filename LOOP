@@ -1,5 +1,5 @@
 fun main() {
-    //LOOPS
+    //LOOP
 //     while loop
     var num=23
     while(num>=14){
