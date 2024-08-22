@@ -141,5 +141,69 @@ fun dragObjects(shapes:Array<Draggable>){
 }
 
 fun main(){
-    dragObjects(arrayOf(Square(3.0),Triangle(3.2,2.3), Person("Amartya")))
+    // dragObjects(arrayOf(Square(3.0),Triangle(3.2,2.3), Person("Amartya")))
+
+
+    //--------------24-Type-Checking------------------------------
+    var rectangle = Rect(23.0, 2.0)
+    var square = Square(22.0)
+    var person = Person("Charchil")
+
+    // //-------------Type Checking---------------
+    // if(rectangle is Rect){
+    //     println("this is an object of Rect class")
+    // }else{
+    //     println("this is not an object of Rect class")
+    // }
+
+    //-----------Smart Casting-------------------
+    var arr = arrayOf(rectangle,square)
+    for(obj in arr){
+        println(obj.calArea())
+    }
+
+    var arr2 = arrayOf(rectangle,square,person)
+    for(obj in arr){
+        // println(obj.calArea())    // this will return error as person is not a type of shape so, it won't implement the method calArea() as here obj will only be able to implement "drag()" function because of smart typeCasting...
+
+        println(obj.drag())
+    }
+
+    //--------------Object Declaration-----------------------
+    A.makeSound()
+
+    //--------------Object Expression--------------------
+    var mohit = object:People() {
+        fun getAge(){
+            age++;
+            println("My age is $age")
+        }
+    }
+    mohit.getAge()
+
+    var obj2 = object:makeSound{
+        override fun makeSound(){
+            println("Hahahah")
+        }
+    }
+
+}
+
+object A{
+    var name = "Mohitba"
+    fun makeSound(){
+        println("$name Aaaaahhhhh!")
+    }
+}
+
+interface makeSound{
+    fun makeSound(){
+        println("SOundaaaaa!")
+    }
+}
+class People{
+    private var age = 23
+    fun getAge(){
+        println(age)
+    }
 }
