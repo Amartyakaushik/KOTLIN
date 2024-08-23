@@ -173,20 +173,45 @@ fun main(){
     A.makeSound()
 
     //--------------Object Expression--------------------
-    var mohit = object:People() {
-        fun getAge(){
-            age++;
-            println("My age is $age")
-        }
-    }
-    mohit.getAge()
+    // var mohit = object:People() {
+    //     override fun getAge(){
+    //         age++;
+    //         println("My age is $age")
+    //     }
+    // }
+    // mohit.getAge()
 
     var obj2 = object:makeSound{
         override fun makeSound(){
             println("Hahahah")
         }
     }
+    //------------------27--Companion Object------------------
 
+    // var pizza = Pizza.Factory.order("Corn")    // without the use of companion
+    var pizza = Pizza.order("Corn")     // with the use of companion
+    println(pizza.pizzaType)
+    println(pizza.popping)
+//-----------------------28--Data Classes and Equals-------------
+var human = Species("Human",75)
+println(human.component1())  // this will return the 1st component (type)
+println(human.component2())  // this will return the 2nd component (avgAge)
+
+//-----------------------29--Enum--Sealed Classes-----------------------
+var day = Day.MONDAY
+println(day.num)
+day.formattedDay()
+for(i in Day.values()){
+    println(i)
+}
+
+// -------------------------Sealed classes--------------
+var tile = Red("Mushroom",20)
+val points = when(tile){
+    is Red -> tile.point * 5
+    is Blue -> tile.point * 10
+}
+println(points)
 }
 
 object A{
@@ -202,8 +227,46 @@ interface makeSound{
     }
 }
 class People{
-    private var age = 23
-    fun getAge(){
+    var age = 23
+    open fun getAge(){
         println(age)
     }
 }
+//------------------27--Companion Object------------------
+
+class Pizza(var pizzaType:String, var popping:String) {
+    companion object Factory{
+        @JvmStatic
+        fun order(type:String):Pizza {
+            return when(type){
+                "Corn" -> Pizza("SweetCorn","With cheese")
+                "Tomato" -> Pizza("Tomato", "Without cheese")
+                else -> Pizza("General Pizza","With myonees")
+            }
+        }
+    }
+}
+
+//-----------------------28--Data Classes and Equals-------------
+data class Species(val type:String, var avgAge:Int)
+
+//-----------------------29--Enum--Sealed Classes-----------------------
+enum class Day(val num:Int){
+    SUNDAY(1),
+    MONDAY(2),
+    TUESDAY(3),
+    WEDNESDAY(4),
+    THURSDAY(5),
+    FIRDAY(6),
+    SATURDAY(7);
+
+    fun formattedDay(){
+        println("Day is $this")
+    }
+}
+
+
+// -------------------------Sealed classes--------------
+sealed class Tile
+class Red(val type:String, val point:Int):Tile()
+class Blue(val point:Int):Tile()
