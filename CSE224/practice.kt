@@ -212,6 +212,54 @@ val points = when(tile){
     is Blue -> tile.point * 10
 }
 println(points)
+
+
+//------------------------33 -  Higher Order Function and function Types--------------
+var fn = ::sum
+println(fn(23,32))
+
+calculator(23.23,12.32,::mul)
+
+//------------------------34 -  Lambda Expression ----------------
+
+var lambda = {a:Int, b:Int -> a*b }
+var lambda2:(Int,Int) -> Int = {a,b -> a*b }
+var multiLineLambda = {
+    println("Hello Lambda")
+    val a = 23.2
+    "Print hii"
+}
+var singleParamLambda = {x:Int -> x * x}
+var simplifySingleParam:(Int) -> Int = {it + it}
+
+println(lambda(12,12))
+println(lambda2(22,11))
+multiLineLambda()
+println(singleParamLambda(13))
+println(simplifySingleParam(100))
+calculator(1.2,3.4) {a,b -> a * b}
+
+//----------------35 -- Map, Filter, Foreach Loop--------------
+val num = listOf(1,2,3,44,5)
+var list1 = num.filter(::isOdd)
+var list2 = num.filter(fun(a:Int):Boolean {
+    return a % 2 != 0
+})
+var list3 = num.filter{it % 2 != 0}
+println(list1)
+println(list2)
+println(list3)
+var userList = listOf(User(1,"abba"),User(2,"bubba"))
+var list4 = userList.filter{it.id == 2}
+println(list4)
+var list5 = num.map{it * it}
+var list6 = userList.map{
+    PaidUser(it.id, it.name, "Paid")
+}
+
+println(list5)
+println(list6)
+num.forEach(println(it))
 }
 
 object A{
@@ -270,3 +318,24 @@ enum class Day(val num:Int){
 sealed class Tile
 class Red(val type:String, val point:Int):Tile()
 class Blue(val point:Int):Tile()
+
+//------------------------33 -  Higher Order Function and function Types--------------
+fun sum(a:Int, b:Int) : Int {
+    return a + b
+}
+fun mul(a:Double, b:Double):Double{
+    return a * b
+}
+
+fun calculator(a: Double, b:Double, gn:(Double, Double) -> Double){
+    var result = gn(a,b)
+    println(result)
+}
+
+//----------------35 -- Map, Filter, Foreach Loop--------------
+fun isOdd(a:Int):Boolean{
+    return a % 2 != 0
+}
+
+data class User(val id:Int, val name:String)
+data class PaidUser(val id:Int, val name:String, val type:String)
