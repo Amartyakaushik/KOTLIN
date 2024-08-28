@@ -235,7 +235,56 @@ fun main(){
     println("Function")
     // val str = task()
     // println(c)
+    
+    val cc = task()
+    println(cc)
+    val sum = add(2,3)
+    println(sum)
+    rec()
 
+}
+fun add( a:Int, b:Int):Int{
+    val sum = a + b
+    return sum
+}
+fun task():String {
+   
+    // return "Performing task"
+    val str = "Perfroming task"
+    return str
+}
+
+//--------Recursive function--------
+var count = 0
+fun rec(){
+    count++;  // semicolon works with the statement
+    if(count<= 5){
+        println("Hello " + count);
+        rec();
+    }
+
+    var car1 = Car()
+    car1.getInfo()
+}
+
+class Car{
+    var make: String = ""
+    var model: String = ""
+    var year:Int = 0
+
+    Car(){
+        println("THis is the constructor")
+    }
+    constructor(make:String, model:String, year:Int){
+        this.make = "Ambassdor"
+        this.model = "Mittior"
+        this.year = 1973
+    }
+
+    constructor():this("amabas","adf",2342)
+    fun getInfo():String{
+        return "$make $model , year $year"
+    }
 }
 
 // fun task():String {
